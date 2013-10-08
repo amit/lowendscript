@@ -98,6 +98,15 @@ function install_dash {
 	ln -s dash /bin/sh
 }
 
+function install_devbuild {
+	check_install curl curl
+	check_install bzip2 bzip2
+	check_install build_essential build_essential
+	check_install patch patch
+	check_install libyaml-dev libyaml-dev
+}
+
+
 function install_nano {
 	check_install nano nano
 }
@@ -1269,13 +1278,11 @@ system)
 	update_timezone
 	remove_unneeded
 	update_upgrade
+	install_curl
+	install_bzip2
 	install_dash
 	install_vim
 	install_nano
-	install_htop
-	install_mc
-	install_iotop
-	install_iftop
 	install_syslogd
 	apt_clean
 	;;
