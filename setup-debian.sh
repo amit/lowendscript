@@ -174,15 +174,15 @@ function install_dotdeb {
 	# Debian version 6.x.x
 	if grep ^6. /etc/debian_version > /dev/null
 	then
-		echo "deb http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list
-		echo "deb-src http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list
+		echo "deb http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list.d/dotdeb.list
+		echo "#deb-src http://packages.dotdeb.org squeeze all" >> /etc/apt/sources.list.d/dotdeb.list
 	fi
 
 	# Debian version 7.x.x
 	if grep ^7. /etc/debian_version > /dev/null
 	then
-		echo "deb http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list
-		echo "deb-src http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list
+		echo "deb http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list.d/dotdeb.list
+		echo "#deb-src http://packages.dotdeb.org wheezy all" >> /etc/apt/sources.list.d/dotdeb.list
 	fi
 
 	wget -q -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
@@ -415,7 +415,7 @@ location ~ \.php$ {
 	fastcgi_temp_file_write_size 256k;
 	fastcgi_intercept_errors    on;
 	fastcgi_ignore_client_abort off;
-	fastcgi_pass 127.0.0.1:9000;
+	fastcgi_pass unix:/var/run/php5-fpm.sock;
 
 }
 # PHP search for file Exploit:
